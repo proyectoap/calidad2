@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Asistente con IA</title>
+</head>
+<body>
+  <h1>Asistente de Firma de Documentos</h1>
+  <textarea id="input" rows="4" cols="50">Explícame cómo firmar un documento PDF paso a paso con imágenes.</textarea>
+  <button id="send">Enviar</button>
+  <div id="output"></div>
+
+  <script>
+    const sendBtn = document.getElementById('send');
+    sendBtn.onclick = async () => {
+      const userInput = document.getElementById('input').value;
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer TU_API_KEY'
+        },
+        body: JSON.stringify({
+          model: "gpt-4o",
+          messages: [
+            { role: "system", content: "Eres un asistente que da instrucciones paso a paso con imágenes en formato Markdown." },
+            { role: "user", content: userInput }
+          ]
+        })
+      });
+      const data = await response.json();
+      const markdown = data.choices[0].message.content;
+      // Convierte Markdown básico a HTML:
+      const html = markdown
+        .replace(/!\[([^\]]*)\]\((.*?)\)/g, '<img alt="$1" src="$2" style="max-width:300px;"><br>') // imágenes
+        .replace(/\n/g, '<br>'); // saltos de línea
+      document.getElementById('output').innerHTML = html;
+    };
+  </script>
+</body>
+</html>
