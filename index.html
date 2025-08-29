@@ -3,7 +3,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Prueba Consentimiento Clarity</title>
+  <title>Prueba Consentimiento Clarity - Bloqueo Real</title>
   <style>
     #cookie-banner {
       position: fixed;
@@ -25,16 +25,11 @@
       cursor: pointer;
     }
   </style>
-</head>
-<body>
-  <h1>Bienvenido a la prueba de consentimiento</h1>
-  <p>Si no aceptas cookies, Clarity no grabará tu sesión.</p>
 
-  <!-- Banner de consentimiento -->
-  <div id="cookie-banner">
-    Este sitio utiliza cookies para análisis. ¿Deseas permitirlo?
-    <button onclick="aceptarCookies()">Aceptar</button>
-  </div>
+  <!-- 🚨 Indicar que Clarity debe esperar consentimiento -->
+  <script type="text/javascript">
+    window.clarityConsent = 'pending';
+  </script>
 
   <!-- Clarity Script -->
   <script type="text/javascript">
@@ -43,14 +38,29 @@
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/sigmen0kt9";
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "sigmen0kt9");
+  </script>
+</head>
 
+<body>
+  <h1>Prueba de consentimiento Clarity con bloqueo real</h1>
+  <p>Clarity no grabará esta sesión hasta que se acepte el uso de cookies.</p>
+
+  <!-- Banner de consentimiento -->
+  <div id="cookie-banner">
+    Este sitio utiliza cookies para análisis. ¿Deseas permitirlo?
+    <button onclick="aceptarCookies()">Aceptar</button>
+  </div>
+
+  <script>
     function aceptarCookies() {
       document.getElementById("cookie-banner").style.display = "none";
-      clarity('consent', 'granted');
+      clarity('consent', 'granted'); // 🟢 Activar grabación tras consentimiento
     }
   </script>
 </body>
 </html>
+
+
 
 
 
