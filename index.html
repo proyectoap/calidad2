@@ -1,35 +1,56 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Asistente con IA</title>
-  <script type="text/javascript">
-  // Inicializar Clarity en modo consentimiento requerido
-  (function(c,l,a,r,i,t,y){
-    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/sigmen0kt9";
-    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-  })(window, document, "clarity", "script");
-
-  // Función para aceptar cookies
-  function aceptarCookies() {
-    document.getElementById("cookie-banner").style.display = "none";
-    clarity('consent', 'granted'); // 🟢 Habilita el tracking
-  }
-
-  // Opcional: podrías agregar un botón de rechazar también
-  // clarity('consent', 'denied'); // 🔴 Si el usuario rechaza
-</script>
-  
+  <title>Prueba Consentimiento Clarity</title>
+  <style>
+    #cookie-banner {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #1d5172;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      z-index: 10000;
+      font-family: sans-serif;
+    }
+    #cookie-banner button {
+      margin-left: 15px;
+      padding: 5px 15px;
+      background-color: #9AC21C;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
+  <h1>Bienvenido a la prueba de consentimiento</h1>
+  <p>Si no aceptas cookies, Clarity no grabará tu sesión.</p>
 
-  <div id="cookie-banner" style="position: fixed; bottom: 0; width: 100%; background: #1d5172; color: white; padding: 10px; text-align: center; z-index: 9999;">
-  Este sitio usa cookies para mejorar tu experiencia.
-  <button onclick="aceptarCookies()" style="margin-left: 10px; padding: 5px 10px;">Aceptar</button>
+  <!-- Banner de consentimiento -->
+  <div id="cookie-banner">
+    Este sitio utiliza cookies para análisis. ¿Deseas permitirlo?
+    <button onclick="aceptarCookies()">Aceptar</button>
+  </div>
 
-</div>
-  
+  <!-- Clarity Script -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/sigmen0kt9";
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "sigmen0kt9");
+
+    function aceptarCookies() {
+      document.getElementById("cookie-banner").style.display = "none";
+      clarity('consent', 'granted');
+    }
+  </script>
 </body>
 </html>
+
+
 
